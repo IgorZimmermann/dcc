@@ -19,7 +19,9 @@ export default function createConfig(options, ...userConfigs) {
 			"node/prefer-global/process": ["off"],
 			"node/no-process-env": ["error"],
 			"perfectionist/sort-imports": ["error", {
-				tsconfigRootDir: ".",
+				"tsconfig": {
+					"rootDir": ".",
+				}
 			}],
 			"unicorn/filename-case": ["error", {
 				case: "kebabCase",
