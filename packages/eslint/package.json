@@ -1,0 +1,14 @@
+{
+	"name": "@dcc/eslint",
+	"type": "module",
+	"version": "1.0.0",
+	"exports": {
+		".": "./eslint.config.js",
+		"./create-config": "./create-config.js"
+	},
+	"devDependencies": {
+		"@antfu/eslint-config": "^9.5.1",
+		"eslint": "^10.11.0",
+		"eslint-plugin-format": "^2.0.1"
+	}
+}

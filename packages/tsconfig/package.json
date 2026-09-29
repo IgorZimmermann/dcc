@@ -1,0 +1,6 @@
+{
+	"name": "@dcc/tsconfig",
+	"publishConfig": {
+		"access": "public"
+	}
+}
