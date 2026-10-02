@@ -1,6 +1,13 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 
 import "./globals.css"
+
+export const viewport: Viewport = {
+	width: "device-width",
+	initialScale: 1,
+	viewportFit: "cover",
+	themeColor: "#fece1d",
+}
 
 export const metadata: Metadata = {
 	title: "DCC",
@@ -9,11 +16,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
-		<html
-			lang="en"
-			className="h-full antialiased"
-		>
-			<body className="min-h-full flex flex-col">{children}</body>
+		<html lang="en" className="antialiased">
+			<body className="min-h-dvh">{children}</body>
 		</html>
 	)
 }
