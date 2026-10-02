@@ -5,7 +5,7 @@ import Header from "../components/header"
 import Navbar from "../components/navbar"
 
 export default function Home() {
-	const data = {
+	const homeData = {
 		sections: [{
 			title: "dcc",
 			background: "/drone-in-the-sky.jpg",
@@ -43,12 +43,48 @@ export default function Home() {
 		}],
 	}
 
+	const navbarData = {
+		links: [
+			{
+				url: "/",
+				text: "home",
+			},
+			{
+				url: "/about",
+				text: "about",
+			},
+			{
+				url: "/team",
+				text: "team",
+			},
+			{
+				url: "/sponsorships",
+				text: "sponsorships",
+			},
+		],
+		socials: [
+			{
+				url: "https://instagram.com/droneconstructionclub",
+				site: "instagram",
+			},
+			{
+				url: "https://www.youtube.com/@DroneConstructionClub",
+				site: "youtube",
+			},
+			{
+				url: "https://linkedin.com/company/drone-construction-club",
+				site: "linkedin",
+			},
+		],
+		email: "dcc@org.sdu.dk",
+	}
+
 	return (
 		<>
-			<Navbar />
+			<Navbar {...navbarData} />
 
 			<main>
-				{data.sections.map((section, i) => (
+				{homeData.sections.map((section, i) => (
 					<Fragment key={section.title}>
 						<Header {...section} index={i + 1} />
 						{section.contents.map(content => (
