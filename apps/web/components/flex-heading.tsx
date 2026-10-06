@@ -1,5 +1,7 @@
 "use client"
 
+import type { CSSProperties } from "react"
+
 import { useLayoutEffect, useRef } from "react"
 
 import { cn } from "../lib/cn"
@@ -7,9 +9,10 @@ import { cn } from "../lib/cn"
 type FlexHeadingProps = {
 	text: string
 	className?: string
+	style?: CSSProperties
 }
 
-export default function FlexHeading({ text, className }: FlexHeadingProps) {
+export default function FlexHeading({ text, className, style }: FlexHeadingProps) {
 	const textRef = useRef<HTMLHeadingElement>(null)
 
 	// Scale the title to the largest font size that fits on one line
@@ -44,6 +47,6 @@ export default function FlexHeading({ text, className }: FlexHeadingProps) {
 	}, [])
 
 	return (
-		<h1 ref={textRef} className={cn(className)}>{text}</h1>
+		<h1 ref={textRef} className={cn(className)} style={style}>{text}</h1>
 	)
 }
