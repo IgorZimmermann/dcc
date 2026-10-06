@@ -2,6 +2,7 @@ packages:
   - "apps/*"
   - "packages/*"
 allowBuilds:
+  '@apollo/protobufjs': true
   unrs-resolver: true
 overrides:
   typescript: 6.0.3
