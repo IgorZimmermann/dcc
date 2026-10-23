@@ -7,10 +7,10 @@ type ContentProps = {
 	title: string
 	text: string
 	index: number
-	action?: {
+	action: {
 		link: string
 		text: string
-	}
+	} | null
 }
 
 export default function Content({ title, text, index, action }: ContentProps) {

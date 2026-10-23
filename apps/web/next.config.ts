@@ -1,8 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
+
+import env from "./lib/env"
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
-};
+	/* config options here */
+	reactCompiler: true,
+	images: {
+		remotePatterns: [new URL(`${env.STRAPI_MEDIA.replace(/\/$/, "")}/**`)],
+		dangerouslyAllowLocalIP: env.NODE_ENV === "development",
+	},
+}
 
-export default nextConfig;
+export default nextConfig

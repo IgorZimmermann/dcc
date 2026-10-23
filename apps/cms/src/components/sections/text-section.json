@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_sections_text_sections",
+  "info": {
+    "displayName": "Text Section",
+    "icon": "quote"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "background": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "foreground": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "contents": {
+      "type": "component",
+      "component": "sections.text",
+      "repeatable": true,
+      "required": true
+    }
+  },
+  "config": {}
+}

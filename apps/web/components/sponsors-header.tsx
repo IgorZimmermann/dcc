@@ -5,26 +5,34 @@ import FlexHeading from "./flex-heading"
 
 type SponsorsHeaderProps = {
 	title: string
-	background: string
-	/** Transparent PNG with the same dimensions as `background`. */
-	backgroundHover: string | null
+	background: {
+		alternativeText: string | null
+		url: string
+	}
+	foreground: {
+		alternativeText: string | null
+		url: string
+	} | null
 	sponsors: {
-		image: string
+		image: {
+			alternativeText: string | null
+			url: string
+		}
 		url: string
 		name: string
 	}[]
 	index: number
 }
 
-export default function SponsorsHeader({ title, background, backgroundHover, sponsors, index }: SponsorsHeaderProps) {
+export default function SponsorsHeader({ title, background, foreground, sponsors, index }: SponsorsHeaderProps) {
 	const zIndex = index * 10
 
 	return (
 		<>
 			{/* Background: sticks */}
 			<Image
-				src={background}
-				alt=""
+				src={background.url}
+				alt={background.alternativeText ?? ""}
 				width={1920}
 				height={1080}
 				sizes="100vw"
@@ -34,10 +42,10 @@ export default function SponsorsHeader({ title, background, backgroundHover, spo
 			/>
 
 			{/* Hover image: same size as the background, sticks in sync above the text */}
-			{backgroundHover != null && (
+			{foreground != null && (
 				<Image
-					src={backgroundHover}
-					alt=""
+					src={foreground.url}
+					alt={foreground.alternativeText ?? ""}
 					width={1920}
 					height={1080}
 					sizes="100vw"
@@ -59,7 +67,7 @@ export default function SponsorsHeader({ title, background, backgroundHover, spo
 				<div className={cn("w-max flex flex-row items-center mt-60 animate-marquee")}>
 					{[...sponsors, ...sponsors].map((sponsor, i) => (
 						<Image
-							src={sponsor.image}
+							src={sponsor.image.url}
 							alt={i < sponsors.length ? sponsor.name : ""}
 							aria-hidden={i >= sponsors.length}
 							width={1200}

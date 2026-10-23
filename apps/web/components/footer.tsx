@@ -9,7 +9,9 @@ import { cn } from "../lib/cn"
 type FooterProps = {
 	motto: string
 	links: {
-		url: string
+		page: {
+			slug: string
+		}
 		text: string
 	}[]
 	socials: {
@@ -46,7 +48,7 @@ export default function Footer({ motto, links, socials, email }: FooterProps) {
 				<ul className={cn("text-center flex flex-col gap-5")}>
 					{links.map(link => (
 						<li className={cn("uppercase leading-5")} key={link.text}>
-							<Link href={link.url} className={cn("m-0")}>{link.text}</Link>
+							<Link href={`/${link.page.slug !== "home" ? link.page.slug : ""}`} className={cn("m-0")}>{link.text}</Link>
 						</li>
 					))}
 				</ul>

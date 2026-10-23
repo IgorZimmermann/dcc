@@ -7,8 +7,11 @@ type TeamGroupProps = {
 	title: string
 	members: {
 		name: string
-		source: string
-		title?: string
+		portrait: {
+			alternativeText: string | null
+			url: string
+		}
+		title: string | null
 	}[]
 	index: number
 }
@@ -58,7 +61,7 @@ export default function TeamGroup({ title, members, index }: TeamGroupProps) {
 							{member.title && <span className={cn("uppercase")}>{member.title}</span>}
 						</div>
 						<Image
-							src={member.source}
+							src={member.portrait.url}
 							alt={`${member.name} portrait`}
 							height={2000}
 							width={1500}

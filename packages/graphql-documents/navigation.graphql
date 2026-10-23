@@ -5,7 +5,9 @@ query Navigation {
     }
     links {
       text
-      url
+      page {
+        slug
+      }
       id
     }
     socials {

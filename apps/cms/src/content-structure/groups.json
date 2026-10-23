@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "sections": {
+    "collectionTypes": {
+      "groups": [
+        {
+          "parent": null,
+          "name": "Team",
+          "id": "grp_be0907e040154bc4abf69637",
+          "children": [
+            {
+              "uid": "api::group.group",
+              "type": "contentType"
+            },
+            {
+              "uid": "api::member.member",
+              "type": "contentType"
+            }
+          ]
+        }
+      ]
+    },
+    "singleTypes": {
+      "groups": []
+    }
+  }
+}

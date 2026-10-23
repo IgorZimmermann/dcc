@@ -5,21 +5,26 @@ import FlexHeading from "./flex-heading"
 
 type HeaderProps = {
 	title: string
-	background: string
-	/** Transparent PNG with the same dimensions as `background`. */
-	backgroundHover: string | null
+	background: {
+		alternativeText: string | null
+		url: string
+	}
+	foreground: {
+		alternativeText: string | null
+		url: string
+	} | null
 	index: number
 }
 
-export default function Header({ title, background, backgroundHover, index }: HeaderProps) {
+export default function Header({ title, background, foreground, index }: HeaderProps) {
 	const zIndex = index * 10
 
 	return (
 		<>
 			{/* Background: sticks */}
 			<Image
-				src={background}
-				alt=""
+				src={background.url}
+				alt={background.alternativeText ?? ""}
 				width={1920}
 				height={1080}
 				sizes="100vw"
@@ -29,10 +34,10 @@ export default function Header({ title, background, backgroundHover, index }: He
 			/>
 
 			{/* Hover image: same size as the background, sticks in sync above the text */}
-			{backgroundHover != null && (
+			{foreground != null && (
 				<Image
-					src={backgroundHover}
-					alt=""
+					src={foreground.url}
+					alt={foreground.alternativeText ?? ""}
 					width={1920}
 					height={1080}
 					sizes="100vw"
@@ -49,6 +54,7 @@ export default function Header({ title, background, backgroundHover, index }: He
 			>
 				<FlexHeading
 					text={title}
+					high={200}
 					className={cn("font-bold text-6xl uppercase text-[#fece1d] whitespace-nowrap shrink-0")}
 				/>
 			</div>

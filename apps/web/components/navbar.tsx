@@ -8,7 +8,9 @@ import { cn } from "../lib/cn"
 
 type NavbarProps = {
 	links: {
-		url: string
+		page: {
+			slug: string
+		}
 		text: string
 	}[]
 	socials: {
@@ -72,7 +74,7 @@ export default function Navbar({ links, socials, email }: NavbarProps) {
 					<ul className={cn("flex flex-col gap-3")}>
 						{links.map(link => (
 							<li key={link.text}>
-								<Link href={link.url} className={cn("uppercase")}>{link.text}</Link>
+								<Link href={`/${link.page.slug !== "home" ? link.page.slug : ""}`} className={cn("uppercase")}>{link.text}</Link>
 							</li>
 						))}
 					</ul>

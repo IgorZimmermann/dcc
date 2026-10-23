@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_sections_team_sections",
+  "info": {
+    "displayName": "Team Section",
+    "icon": "emotionHappy"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "background": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "foreground": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "groups": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::group.group",
+      "required": true
+    },
+    "contents": {
+      "type": "component",
+      "component": "sections.text",
+      "repeatable": true,
+      "required": true
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_sections_sponsors",
+  "info": {
+    "displayName": "Sponsor",
+    "icon": "crown"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true,
+      "regex": "^https:\\/\\/[^\\s\\/?#]+(?:\\/[^\\s?#]*)?(?:\\?[^\\s#]*)?(?:#\\S*)?$"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

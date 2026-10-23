@@ -14,6 +14,7 @@ export type Scalars = {
   Float: { input: number; output: number; }
   DateTime: { input: unknown; output: unknown; }
   JSON: { input: unknown; output: unknown; }
+  PageSectionsDynamicZoneInput: { input: unknown; output: unknown; }
 };
 
 export type BooleanFilterInput = {
@@ -55,22 +56,22 @@ export type ComponentNavigationEmailInput = {
 export type ComponentNavigationInternalPage = {
   __typename?: 'ComponentNavigationInternalPage';
   id: Scalars['ID']['output'];
+  page: Page;
   text: Scalars['String']['output'];
-  url: Scalars['String']['output'];
 };
 
 export type ComponentNavigationInternalPageFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<ComponentNavigationInternalPageFiltersInput>>>;
   not?: InputMaybe<ComponentNavigationInternalPageFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ComponentNavigationInternalPageFiltersInput>>>;
+  page?: InputMaybe<PageFiltersInput>;
   text?: InputMaybe<StringFilterInput>;
-  url?: InputMaybe<StringFilterInput>;
 };
 
 export type ComponentNavigationInternalPageInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
+  page?: InputMaybe<Scalars['ID']['input']>;
   text?: InputMaybe<Scalars['String']['input']>;
-  url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ComponentNavigationSocial = {
@@ -92,6 +93,126 @@ export type ComponentNavigationSocialInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
   site?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ComponentSectionsAction = {
+  __typename?: 'ComponentSectionsAction';
+  id: Scalars['ID']['output'];
+  link: Scalars['String']['output'];
+  text: Scalars['String']['output'];
+};
+
+export type ComponentSectionsActionFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentSectionsActionFiltersInput>>>;
+  link?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentSectionsActionFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentSectionsActionFiltersInput>>>;
+  text?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentSectionsSponsor = {
+  __typename?: 'ComponentSectionsSponsor';
+  id: Scalars['ID']['output'];
+  image: UploadFile;
+  name: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type ComponentSectionsSponsorFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentSectionsSponsorFiltersInput>>>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentSectionsSponsorFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentSectionsSponsorFiltersInput>>>;
+  url?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentSectionsSponsorSection = {
+  __typename?: 'ComponentSectionsSponsorSection';
+  background: UploadFile;
+  contents: Array<Maybe<ComponentSectionsText>>;
+  foreground?: Maybe<UploadFile>;
+  id: Scalars['ID']['output'];
+  sponsors: Array<Maybe<ComponentSectionsSponsor>>;
+  title: Scalars['String']['output'];
+};
+
+
+export type ComponentSectionsSponsorSectionContentsArgs = {
+  filters?: InputMaybe<ComponentSectionsTextFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ComponentSectionsSponsorSectionSponsorsArgs = {
+  filters?: InputMaybe<ComponentSectionsSponsorFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentSectionsTeamSection = {
+  __typename?: 'ComponentSectionsTeamSection';
+  background: UploadFile;
+  contents: Array<Maybe<ComponentSectionsText>>;
+  foreground?: Maybe<UploadFile>;
+  groups: Array<Maybe<Group>>;
+  groups_connection: GroupRelationResponseCollection;
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
+};
+
+
+export type ComponentSectionsTeamSectionContentsArgs = {
+  filters?: InputMaybe<ComponentSectionsTextFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ComponentSectionsTeamSectionGroupsArgs = {
+  filters?: InputMaybe<GroupFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type ComponentSectionsTeamSectionGroups_ConnectionArgs = {
+  filters?: InputMaybe<GroupFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ComponentSectionsText = {
+  __typename?: 'ComponentSectionsText';
+  action?: Maybe<ComponentSectionsAction>;
+  id: Scalars['ID']['output'];
+  text: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type ComponentSectionsTextFiltersInput = {
+  action?: InputMaybe<ComponentSectionsActionFiltersInput>;
+  and?: InputMaybe<Array<InputMaybe<ComponentSectionsTextFiltersInput>>>;
+  not?: InputMaybe<ComponentSectionsTextFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentSectionsTextFiltersInput>>>;
+  text?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentSectionsTextSection = {
+  __typename?: 'ComponentSectionsTextSection';
+  background: UploadFile;
+  contents: Array<Maybe<ComponentSectionsText>>;
+  foreground?: Maybe<UploadFile>;
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
+};
+
+
+export type ComponentSectionsTextSectionContentsArgs = {
+  filters?: InputMaybe<ComponentSectionsTextFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type DateTimeFilterInput = {
@@ -122,6 +243,12 @@ export type DateTimeFilterInput = {
 export type DeleteMutationResponse = {
   __typename?: 'DeleteMutationResponse';
   documentId: Scalars['ID']['output'];
+};
+
+export type Error = {
+  __typename?: 'Error';
+  code: Scalars['String']['output'];
+  message?: Maybe<Scalars['String']['output']>;
 };
 
 export type FileInfoInput = {
@@ -155,7 +282,62 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']['input']>;
 };
 
-export type GenericMorph = ComponentNavigationEmail | ComponentNavigationInternalPage | ComponentNavigationSocial | I18NLocale | Navigation | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ComponentNavigationEmail | ComponentNavigationInternalPage | ComponentNavigationSocial | ComponentSectionsAction | ComponentSectionsSponsor | ComponentSectionsSponsorSection | ComponentSectionsTeamSection | ComponentSectionsText | ComponentSectionsTextSection | Group | I18NLocale | Member | Navigation | Page | ReviewWorkflowsWorkflow | ReviewWorkflowsWorkflowStage | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+
+export type Group = {
+  __typename?: 'Group';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  members: Array<Maybe<Member>>;
+  members_connection: MemberRelationResponseCollection;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  title: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+
+export type GroupMembersArgs = {
+  filters?: InputMaybe<MemberFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type GroupMembers_ConnectionArgs = {
+  filters?: InputMaybe<MemberFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type GroupEntityResponseCollection = {
+  __typename?: 'GroupEntityResponseCollection';
+  nodes: Array<Group>;
+  pageInfo: Pagination;
+};
+
+export type GroupFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<GroupFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  members?: InputMaybe<MemberFiltersInput>;
+  not?: InputMaybe<GroupFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<GroupFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type GroupInput = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  members?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GroupRelationResponseCollection = {
+  __typename?: 'GroupRelationResponseCollection';
+  nodes: Array<Group>;
+};
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -260,17 +442,65 @@ export type JsonFilterInput = {
   startsWith?: InputMaybe<Scalars['JSON']['input']>;
 };
 
+export type Member = {
+  __typename?: 'Member';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  documentId: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  portrait: UploadFile;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type MemberEntityResponseCollection = {
+  __typename?: 'MemberEntityResponseCollection';
+  nodes: Array<Member>;
+  pageInfo: Pagination;
+};
+
+export type MemberFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<MemberFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<MemberFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<MemberFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type MemberInput = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  portrait?: InputMaybe<Scalars['ID']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MemberRelationResponseCollection = {
+  __typename?: 'MemberRelationResponseCollection';
+  nodes: Array<Member>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
+  createGroup?: Maybe<Group>;
+  createMember?: Maybe<Member>;
+  createPage?: Maybe<Page>;
   createReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   createReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   /** Create a new role */
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteGroup?: Maybe<DeleteMutationResponse>;
+  deleteMember?: Maybe<DeleteMutationResponse>;
   deleteNavigation?: Maybe<DeleteMutationResponse>;
+  deletePage?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflow?: Maybe<DeleteMutationResponse>;
   deleteReviewWorkflowsWorkflowStage?: Maybe<DeleteMutationResponse>;
   deleteUploadFile?: Maybe<UploadFile>;
@@ -287,7 +517,10 @@ export type Mutation = {
   register: UsersPermissionsLoginPayload;
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
+  updateGroup?: Maybe<Group>;
+  updateMember?: Maybe<Member>;
   updateNavigation?: Maybe<Navigation>;
+  updatePage?: Maybe<Page>;
   updateReviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   updateReviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   updateUploadFile: UploadFile;
@@ -302,6 +535,24 @@ export type MutationChangePasswordArgs = {
   currentPassword: Scalars['String']['input'];
   password: Scalars['String']['input'];
   passwordConfirmation: Scalars['String']['input'];
+};
+
+
+export type MutationCreateGroupArgs = {
+  data: GroupInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreateMemberArgs = {
+  data: MemberInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationCreatePageArgs = {
+  data: PageInput;
+  status?: InputMaybe<PublicationStatus>;
 };
 
 
@@ -324,6 +575,21 @@ export type MutationCreateUsersPermissionsRoleArgs = {
 
 export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
+};
+
+
+export type MutationDeleteGroupArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteMemberArgs = {
+  documentId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeletePageArgs = {
+  documentId: Scalars['ID']['input'];
 };
 
 
@@ -379,8 +645,29 @@ export type MutationResetPasswordArgs = {
 };
 
 
+export type MutationUpdateGroupArgs = {
+  data: GroupInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdateMemberArgs = {
+  data: MemberInput;
+  documentId: Scalars['ID']['input'];
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type MutationUpdateNavigationArgs = {
   data: NavigationInput;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type MutationUpdatePageArgs = {
+  data: PageInput;
+  documentId: Scalars['ID']['input'];
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -451,6 +738,48 @@ export type NavigationInput = {
   socials?: InputMaybe<Array<InputMaybe<ComponentNavigationSocialInput>>>;
 };
 
+export type Page = {
+  __typename?: 'Page';
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description: Scalars['String']['output'];
+  documentId: Scalars['ID']['output'];
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  sections: Array<Maybe<PageSectionsDynamicZone>>;
+  slug: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type PageEntityResponseCollection = {
+  __typename?: 'PageEntityResponseCollection';
+  nodes: Array<Page>;
+  pageInfo: Pagination;
+};
+
+export type PageFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<PageFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
+  documentId?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<PageFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<PageFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  slug?: InputMaybe<StringFilterInput>;
+  title?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type PageInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  sections?: InputMaybe<Array<Scalars['PageSectionsDynamicZoneInput']['input']>>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageSectionsDynamicZone = ComponentSectionsSponsorSection | ComponentSectionsTeamSection | ComponentSectionsTextSection | Error;
+
 export type Pagination = {
   __typename?: 'Pagination';
   page: Scalars['Int']['output'];
@@ -484,11 +813,20 @@ export enum PublicationStatus {
 
 export type Query = {
   __typename?: 'Query';
+  group?: Maybe<Group>;
+  groups: Array<Maybe<Group>>;
+  groups_connection?: Maybe<GroupEntityResponseCollection>;
   i18NLocale?: Maybe<I18NLocale>;
   i18NLocales: Array<Maybe<I18NLocale>>;
   i18NLocales_connection?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  member?: Maybe<Member>;
+  members: Array<Maybe<Member>>;
+  members_connection?: Maybe<MemberEntityResponseCollection>;
   navigation?: Maybe<Navigation>;
+  page?: Maybe<Page>;
+  pages: Array<Maybe<Page>>;
+  pages_connection?: Maybe<PageEntityResponseCollection>;
   reviewWorkflowsWorkflow?: Maybe<ReviewWorkflowsWorkflow>;
   reviewWorkflowsWorkflowStage?: Maybe<ReviewWorkflowsWorkflowStage>;
   reviewWorkflowsWorkflowStages: Array<Maybe<ReviewWorkflowsWorkflowStage>>;
@@ -504,6 +842,34 @@ export type Query = {
   usersPermissionsUser?: Maybe<UsersPermissionsUser>;
   usersPermissionsUsers: Array<Maybe<UsersPermissionsUser>>;
   usersPermissionsUsers_connection?: Maybe<UsersPermissionsUserEntityResponseCollection>;
+};
+
+
+export type QueryGroupArgs = {
+  documentId: Scalars['ID']['input'];
+  hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+  publicationFilter?: InputMaybe<PublicationFilter>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryGroupsArgs = {
+  filters?: InputMaybe<GroupFiltersInput>;
+  hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationFilter?: InputMaybe<PublicationFilter>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryGroups_ConnectionArgs = {
+  filters?: InputMaybe<GroupFiltersInput>;
+  hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationFilter?: InputMaybe<PublicationFilter>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
 };
 
 
@@ -535,9 +901,65 @@ export type QueryI18NLocales_ConnectionArgs = {
 };
 
 
+export type QueryMemberArgs = {
+  documentId: Scalars['ID']['input'];
+  hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+  publicationFilter?: InputMaybe<PublicationFilter>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryMembersArgs = {
+  filters?: InputMaybe<MemberFiltersInput>;
+  hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationFilter?: InputMaybe<PublicationFilter>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryMembers_ConnectionArgs = {
+  filters?: InputMaybe<MemberFiltersInput>;
+  hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationFilter?: InputMaybe<PublicationFilter>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
 export type QueryNavigationArgs = {
   hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
   publicationFilter?: InputMaybe<PublicationFilter>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryPageArgs = {
+  documentId: Scalars['ID']['input'];
+  hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+  publicationFilter?: InputMaybe<PublicationFilter>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryPagesArgs = {
+  filters?: InputMaybe<PageFiltersInput>;
+  hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationFilter?: InputMaybe<PublicationFilter>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<PublicationStatus>;
+};
+
+
+export type QueryPages_ConnectionArgs = {
+  filters?: InputMaybe<PageFiltersInput>;
+  hasPublishedVersion?: InputMaybe<Scalars['Boolean']['input']>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationFilter?: InputMaybe<PublicationFilter>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<PublicationStatus>;
 };
 
@@ -1078,10 +1500,111 @@ export type UsersPermissionsUserRelationResponseCollection = {
   nodes: Array<UsersPermissionsUser>;
 };
 
+export type DateTimeFilterInput = {
+  and?: Array<unknown> | null | undefined;
+  between?: Array<unknown> | null | undefined;
+  contains?: unknown;
+  containsi?: unknown;
+  endsWith?: unknown;
+  eq?: unknown;
+  eqi?: unknown;
+  gt?: unknown;
+  gte?: unknown;
+  in?: Array<unknown> | null | undefined;
+  lt?: unknown;
+  lte?: unknown;
+  ne?: unknown;
+  nei?: unknown;
+  not?: DateTimeFilterInput | null | undefined;
+  notContains?: unknown;
+  notContainsi?: unknown;
+  notIn?: Array<unknown> | null | undefined;
+  notNull?: boolean | null | undefined;
+  null?: boolean | null | undefined;
+  or?: Array<unknown> | null | undefined;
+  startsWith?: unknown;
+};
+
+export type IdFilterInput = {
+  and?: Array<string | number | null | undefined> | null | undefined;
+  between?: Array<string | number | null | undefined> | null | undefined;
+  contains?: string | number | null | undefined;
+  containsi?: string | number | null | undefined;
+  endsWith?: string | number | null | undefined;
+  eq?: string | number | null | undefined;
+  eqi?: string | number | null | undefined;
+  gt?: string | number | null | undefined;
+  gte?: string | number | null | undefined;
+  in?: Array<string | number | null | undefined> | null | undefined;
+  lt?: string | number | null | undefined;
+  lte?: string | number | null | undefined;
+  ne?: string | number | null | undefined;
+  nei?: string | number | null | undefined;
+  not?: IdFilterInput | null | undefined;
+  notContains?: string | number | null | undefined;
+  notContainsi?: string | number | null | undefined;
+  notIn?: Array<string | number | null | undefined> | null | undefined;
+  notNull?: boolean | null | undefined;
+  null?: boolean | null | undefined;
+  or?: Array<string | number | null | undefined> | null | undefined;
+  startsWith?: string | number | null | undefined;
+};
+
+export type PageFiltersInput = {
+  and?: Array<PageFiltersInput | null | undefined> | null | undefined;
+  createdAt?: DateTimeFilterInput | null | undefined;
+  description?: StringFilterInput | null | undefined;
+  documentId?: IdFilterInput | null | undefined;
+  not?: PageFiltersInput | null | undefined;
+  or?: Array<PageFiltersInput | null | undefined> | null | undefined;
+  publishedAt?: DateTimeFilterInput | null | undefined;
+  slug?: StringFilterInput | null | undefined;
+  title?: StringFilterInput | null | undefined;
+  updatedAt?: DateTimeFilterInput | null | undefined;
+};
+
+export type StringFilterInput = {
+  and?: Array<string | null | undefined> | null | undefined;
+  between?: Array<string | null | undefined> | null | undefined;
+  contains?: string | null | undefined;
+  containsi?: string | null | undefined;
+  endsWith?: string | null | undefined;
+  eq?: string | null | undefined;
+  eqi?: string | null | undefined;
+  gt?: string | null | undefined;
+  gte?: string | null | undefined;
+  in?: Array<string | null | undefined> | null | undefined;
+  lt?: string | null | undefined;
+  lte?: string | null | undefined;
+  ne?: string | null | undefined;
+  nei?: string | null | undefined;
+  not?: StringFilterInput | null | undefined;
+  notContains?: string | null | undefined;
+  notContainsi?: string | null | undefined;
+  notIn?: Array<string | null | undefined> | null | undefined;
+  notNull?: boolean | null | undefined;
+  null?: boolean | null | undefined;
+  or?: Array<string | null | undefined> | null | undefined;
+  startsWith?: string | null | undefined;
+};
+
 export type NavigationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NavigationQuery = { navigation: { motto: string, email: { address: string }, links: Array<{ text: string, url: string, id: string } | null>, socials: Array<{ site: string, url: string, id: string } | null> } | null };
+export type NavigationQuery = { navigation: { motto: string, email: { address: string }, links: Array<{ text: string, id: string, page: { slug: string } } | null>, socials: Array<{ site: string, url: string, id: string } | null> } | null };
+
+export type PagesQueryVariables = Exact<{
+  filters?: PageFiltersInput | null | undefined;
+}>;
 
 
-export const NavigationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Navigation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"navigation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"address"}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"socials"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"motto"}}]}}]}}]} as unknown as DocumentNode<NavigationQuery, NavigationQueryVariables>;
+export type PagesQuery = { pages: Array<{ slug: string, title: string, description: string, sections: Array<
+      | { __typename: 'ComponentSectionsSponsorSection', id: string, title: string, background: { alternativeText: string | null, url: string }, foreground: { alternativeText: string | null, url: string } | null, sponsors: Array<{ id: string, name: string, url: string, image: { alternativeText: string | null, url: string } } | null>, contents: Array<{ id: string, text: string, title: string, action: { link: string, text: string } | null } | null> }
+      | { __typename: 'ComponentSectionsTeamSection', id: string, title: string, background: { alternativeText: string | null, url: string }, foreground: { alternativeText: string | null, url: string } | null, groups: Array<{ title: string, members: Array<{ name: string, title: string | null, portrait: { alternativeText: string | null, url: string } } | null> } | null>, contents: Array<{ id: string, text: string, title: string } | null> }
+      | { __typename: 'ComponentSectionsTextSection', id: string, title: string, foreground: { alternativeText: string | null, url: string } | null, background: { alternativeText: string | null, url: string }, contents: Array<{ id: string, text: string, title: string, action: { link: string, text: string } | null } | null> }
+      | { __typename: 'Error' }
+     | null> } | null> };
+
+
+export const NavigationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Navigation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"navigation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"address"}}]}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"page"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"socials"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"site"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"motto"}}]}}]}}]} as unknown as DocumentNode<NavigationQuery, NavigationQueryVariables>;
+export const PagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Pages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filters"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PageFiltersInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filters"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"sections"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentSectionsTextSection"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"foreground"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"background"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"action"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentSectionsTeamSection"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"background"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"foreground"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"groups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"portrait"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ComponentSectionsSponsorSection"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"background"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"foreground"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"sponsors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"action"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<PagesQuery, PagesQueryVariables>;

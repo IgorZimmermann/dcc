@@ -1,0 +1,89 @@
+query Pages($filters: PageFiltersInput) {
+  pages(filters: $filters) {
+    slug
+    title
+    description
+    sections {
+      __typename
+      ... on ComponentSectionsTextSection {
+        id
+        title
+        foreground {
+          alternativeText
+          url
+        }
+        background {
+          alternativeText
+          url
+        }
+        contents {
+          id
+          text
+          title
+          action {
+            link
+            text
+          }
+        }
+      }
+      ... on ComponentSectionsTeamSection {
+        id
+        title
+        background {
+          alternativeText
+          url
+        }
+        foreground {
+          alternativeText
+          url
+        }
+        groups {
+          title
+          members {
+            name
+            portrait {
+              alternativeText
+              url
+            }
+            title
+          }
+        }
+        contents {
+          id
+          text
+          title
+        }
+      }
+      ... on ComponentSectionsSponsorSection {
+        id
+        title
+        background {
+          alternativeText
+          url
+        }
+        foreground {
+          alternativeText
+          url
+        }
+        sponsors {
+          id
+          name
+          url
+          image {
+            alternativeText
+            url
+          }
+        }
+        contents {
+          id
+          text
+          title
+          action {
+            link
+            text
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_sections_texts",
+  "info": {
+    "displayName": "Text",
+    "icon": "layer"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "action": {
+      "type": "component",
+      "component": "sections.action",
+      "repeatable": false,
+      "required": false
+    }
+  },
+  "config": {}
+}

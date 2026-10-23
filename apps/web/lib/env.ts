@@ -5,6 +5,7 @@ const envSchema = z.object({
 	NODE_ENV: z.union([z.literal("development"), z.literal("production")]),
 	STRAPI_URL: z.string(),
 	STRAPI_TOKEN: z.string(),
+	STRAPI_MEDIA: z.string(),
 })
 
 /* eslint-disable-next-line node/no-process-env */
