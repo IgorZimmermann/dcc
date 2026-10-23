@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_navigation_internal_pages",
+  "info": {
+    "displayName": "Internal Page",
+    "icon": "cursor"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "^(?:\\/[a-z0-9-]+)*\\/?$"
+    },
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

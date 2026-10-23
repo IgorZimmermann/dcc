@@ -1,5 +1,8 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
 
 import { cn } from "../lib/cn"
 
@@ -14,10 +17,11 @@ type FooterProps = {
 		site: string
 	}[]
 	email: string
-	year: number
 }
 
-export default function Footer({ motto, links, socials, email, year }: FooterProps) {
+export default function Footer({ motto, links, socials, email }: FooterProps) {
+	const [year] = useState(() => new Date().getFullYear())
+
 	return (
 		<div className={cn("bg-black p-5 h-[80dvh] flex flex-col items-center justify-between")}>
 			<div className={cn("flex flex-row justify-between w-full")}>

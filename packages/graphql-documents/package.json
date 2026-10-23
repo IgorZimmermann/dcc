@@ -1,0 +1,6 @@
+{
+	"name": "@dcc/graphql-documents",
+	"exports": {
+		"./*": "./*.graphql"
+	}
+}

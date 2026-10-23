@@ -1,8 +1,13 @@
 import type { Metadata, Viewport } from "next"
 
 import "./globals.css"
+
+import type { NavigationQuery } from "../types/generated/graphql"
+
 import Footer from "../components/footer"
 import Navbar from "../components/navbar"
+import { NavigationDocument } from "../types/generated/graphql"
+import { query } from "./apollo-client"
 
 export const viewport: Viewport = {
 	width: "device-width",
@@ -16,59 +21,34 @@ export const metadata: Metadata = {
 	description: "Drone Construction Club - SDU Sønderborg",
 }
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
-	const navbarData = {
-		links: [
-			{
-				url: "/",
-				text: "home",
-			},
-			{
-				url: "/about",
-				text: "about",
-			},
-			{
-				url: "/team",
-				text: "team",
-			},
-			{
-				url: "/gallery",
-				text: "gallery",
-			},
-			{
-				url: "/sponsorships",
-				text: "sponsorships",
-			},
-		],
-		socials: [
-			{
-				url: "https://instagram.com/droneconstructionclub",
-				site: "instagram",
-			},
-			{
-				url: "https://www.youtube.com/@DroneConstructionClub",
-				site: "youtube",
-			},
-			{
-				url: "https://linkedin.com/company/drone-construction-club",
-				site: "linkedin",
-			},
-		],
-		email: "dcc@org.sdu.dk",
-		motto: "student-led drone engineering club at sdu sønderborg",
-		year: 2026,
-	}
+export const revalidate = 60
+
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+	const navigationData = await query<NavigationQuery>({ query: NavigationDocument })
 
 	return (
 		<html lang="en" className="antialiased">
 			<body className="min-h-dvh">
-				<Navbar {...navbarData} />
+				{navigationData.data && navigationData.data.navigation && (
+					<Navbar
+						email={navigationData.data.navigation.email.address}
+						links={navigationData.data.navigation.links.filter(x => x !== null)}
+						socials={navigationData.data.navigation.socials.filter(x => x !== null)}
+					/>
+				)}
 
 				<main>
 					{children}
 				</main>
 
-				<Footer {...navbarData} />
+				{navigationData.data && navigationData.data.navigation && (
+					<Footer
+						email={navigationData.data.navigation.email.address}
+						links={navigationData.data.navigation.links.filter(x => x !== null)}
+						socials={navigationData.data.navigation.socials.filter(x => x !== null)}
+						motto={navigationData.data.navigation.motto}
+					/>
+				)}
 			</body>
 		</html>
 	)

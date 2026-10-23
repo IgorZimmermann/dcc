@@ -1,0 +1,18 @@
+query Navigation {
+  navigation {
+    email {
+      address
+    }
+    links {
+      text
+      url
+      id
+    }
+    socials {
+      site
+      url
+      id
+    }
+    motto
+  }
+}
