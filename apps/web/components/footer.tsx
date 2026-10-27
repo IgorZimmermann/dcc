@@ -58,7 +58,7 @@ export default function Footer({ motto, links, socials, email }: FooterProps) {
 				<ul className={cn("text-center flex flex-row gap-10")}>
 					{socials.map(social => (
 						<li className={cn("uppercase")} key={social.site}>
-							<Link href={social.url}>
+							<Link href={social.url} target="_blank">
 								<Image src={`/social/${social.site}.svg`} alt={social.site} height={100} width={100} className={cn("h-6 w-6")} />
 							</Link>
 						</li>
