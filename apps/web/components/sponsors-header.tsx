@@ -62,7 +62,7 @@ export default function SponsorsHeader({ title, background, foreground, sponsors
 			>
 				<FlexHeading
 					text={title}
-					className={cn("font-bold text-6xl uppercase text-[#fece1d] whitespace-nowrap shrink-0")}
+					className={cn("font-bold text-center text-6xl uppercase text-[#fece1d] whitespace-nowrap shrink-0")}
 				/>
 				<div className={cn("w-max flex flex-row items-center mt-60 animate-marquee")}>
 					{[...sponsors, ...sponsors].map((sponsor, i) => (
@@ -72,7 +72,7 @@ export default function SponsorsHeader({ title, background, foreground, sponsors
 							aria-hidden={i >= sponsors.length}
 							width={1200}
 							height={1200}
-							className={cn("w-[80dvw] h-auto shrink-0 mx-[calc(10dvw-(var(--spacing)_*_5))]")}
+							className={cn("max-w-[80dvw] w-auto max-h-[25dvh] h-auto shrink-0 mx-[calc(10dvw-(var(--spacing)_*_5))]")}
 							// eslint-disable-next-line react/no-array-index-key
 							key={sponsor.name + i}
 						/>
