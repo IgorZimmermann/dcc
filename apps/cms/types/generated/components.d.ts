@@ -88,8 +88,6 @@ export interface SectionsTeamSection extends Struct.ComponentSchema {
   };
   attributes: {
     background: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    contents: Schema.Attribute.Component<'sections.text', true> &
-      Schema.Attribute.Required;
     foreground: Schema.Attribute.Media<'images'>;
     groups: Schema.Attribute.Relation<'oneToMany', 'api::group.group'> &
       Schema.Attribute.Required;

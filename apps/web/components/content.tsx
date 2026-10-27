@@ -19,7 +19,7 @@ export default function Content({ title, text, index, action }: ContentProps) {
 	return (
 		<div
 			className={cn(
-				"h-dvh relative p-5 flex flex-col items-center justify-center gap-25",
+				"h-dvh relative p-5 lg:px-100 flex flex-col items-center justify-center gap-25",
 				"bg-[rgba(60,60,60,0.20)] backdrop-blur-lg",
 				"snap-start",
 			)}

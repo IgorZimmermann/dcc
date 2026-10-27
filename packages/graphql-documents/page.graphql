@@ -48,11 +48,6 @@ query Pages($filters: PageFiltersInput) {
             title
           }
         }
-        contents {
-          id
-          text
-          title
-        }
       }
       ... on ComponentSectionsSponsorSection {
         id

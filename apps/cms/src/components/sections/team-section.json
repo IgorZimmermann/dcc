@@ -30,12 +30,6 @@
       "relation": "oneToMany",
       "target": "api::group.group",
       "required": true
-    },
-    "contents": {
-      "type": "component",
-      "component": "sections.text",
-      "repeatable": true,
-      "required": true
     }
   },
   "config": {}

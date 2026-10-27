@@ -74,7 +74,13 @@ export default function Navbar({ links, socials, email }: NavbarProps) {
 					<ul className={cn("flex flex-col gap-3")}>
 						{links.map(link => (
 							<li key={link.text}>
-								<Link href={`/${link.page.slug !== "home" ? link.page.slug : ""}`} className={cn("uppercase")}>{link.text}</Link>
+								<Link
+									href={`/${link.page.slug !== "home" ? link.page.slug : ""}`}
+									className={cn("uppercase")}
+									onClick={() => setMobileNavOpen(false)}
+								>
+									{link.text}
+								</Link>
 							</li>
 						))}
 					</ul>

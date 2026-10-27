@@ -491,7 +491,7 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    portrait: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    portrait: Schema.Attribute.Media<'images'>;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
