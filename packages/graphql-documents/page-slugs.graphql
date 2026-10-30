@@ -1,0 +1,5 @@
+query PageSlugs($status: PublicationStatus) {
+  pages(status: $status) {
+    slug
+  }
+}

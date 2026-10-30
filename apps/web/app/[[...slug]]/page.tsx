@@ -1,20 +1,74 @@
+import type { Metadata } from "next"
+
 import { notFound } from "next/navigation"
+import { cache } from "react"
 import { Fragment } from "react/jsx-runtime"
 
-import type { PagesQuery } from "../../types/generated/graphql"
+import type { PageSlugsQuery, PagesQuery } from "../../types/generated/graphql"
 
 import Content from "../../components/content"
 import Header from "../../components/header"
 import SponsorsHeader from "../../components/sponsors-header"
 import TeamGroup from "../../components/team-group"
-import { PagesDocument } from "../../types/generated/graphql"
-import { query } from "../apollo-client"
+import { PagesDocument, PageSlugsDocument } from "../../types/generated/graphql"
+import { getClient, query } from "../apollo-client"
 
-type Props = {
+export const revalidate = 120
+
+export async function generateStaticParams() {
+	const client = getClient()
+	const content = await client.query<PageSlugsQuery>({
+		query: PageSlugsDocument,
+		variables: {
+			status: "PUBLISHED",
+		},
+	})
+
+	return content.data?.pages?.flatMap(page =>
+		page?.slug ? [{ slug: [page.slug] }] : [],
+	) ?? []
+}
+
+const getPage = cache(async (slug: string) => {
+	const pageData = await query<PagesQuery>({
+		query: PagesDocument,
+		variables: {
+			filters: {
+				slug: { eq: slug },
+			},
+		},
+	})
+
+	return pageData.data?.pages?.[0] ?? null
+})
+
+export async function generateMetadata({
+	params,
+}: PageProps): Promise<Metadata> {
+	const { slug } = await params
+
+	if (slug && slug.length > 1)
+		return {}
+
+	const id = slug?.[0] ?? "home"
+
+	const pageData = await getPage(id)
+
+	if (!pageData) {
+		return {}
+	}
+
+	return {
+		title: pageData.title,
+		description: pageData.description,
+	}
+}
+
+type PageProps = {
 	params: Promise<{ slug?: string[] }>
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: PageProps) {
 	const { slug } = await params
 
 	if (slug && slug.length > 1)
@@ -22,41 +76,33 @@ export default async function Page({ params }: Props) {
 
 	const id = slug?.[0] ?? "home"
 
-	const pageData = await query<PagesQuery>({
-		query: PagesDocument,
-		variables: {
-			filters: {
-				slug: { eq: id },
-			},
-		},
-	})
+	const pageData = await getPage(id)
 
 	return (
 		<>
 			{
-				pageData.data
-				&& pageData.data.pages[0]
-				&& pageData.data.pages[0].sections.filter(x => x !== null && x.__typename !== "Error").map((section, i) => (
+				pageData
+				&& pageData.sections.filter(x => x !== null && x.__typename !== "Error").map((section, i) => (
 					<Fragment key={section.id}>
 						{
 							section.__typename === "ComponentSectionsSponsorSection"
 								? (
-										<SponsorsHeader
-											title={section.title}
-											background={section.background}
-											foreground={section.foreground}
-											index={i + 1}
-											sponsors={section.sponsors.filter(x => x !== null)}
-										/>
-									)
+									<SponsorsHeader
+										title={section.title}
+										background={section.background}
+										foreground={section.foreground}
+										index={i + 1}
+										sponsors={section.sponsors.filter(x => x !== null)}
+									/>
+								)
 								: (
-										<Header
-											title={section.title}
-											background={section.background}
-											foreground={section.foreground}
-											index={i + 1}
-										/>
-									)
+									<Header
+										title={section.title}
+										background={section.background}
+										foreground={section.foreground}
+										index={i + 1}
+									/>
+								)
 						}
 						{(() => {
 							switch (section.__typename) {
