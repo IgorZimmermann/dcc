@@ -10,9 +10,10 @@ import Content from "../../components/content"
 import Header from "../../components/header"
 import SponsorsHeader from "../../components/sponsors-header"
 import TeamGroup from "../../components/team-group"
+import { capitalize } from "../../lib/capitalize"
+import env from "../../lib/env"
 import { PagesDocument, PageSlugsDocument } from "../../types/generated/graphql"
 import { getClient, query } from "../apollo-client"
-import { capitalize } from "../../lib/capitalize"
 
 export const revalidate = 120
 
@@ -62,6 +63,18 @@ export async function generateMetadata({
 	return {
 		title: capitalize(pageData.title),
 		description: pageData.description,
+		openGraph: {
+			title: capitalize(pageData.title),
+			description: pageData.description,
+			url: `${env.DOMAIN}/${id ?? ""}`,
+			images: [{
+				url: `/api/og?slug=${id}`,
+			}],
+		},
+		twitter: {
+			card: "summary_large_image",
+			images: [`/api/og?slug=${id}`],
+		},
 	}
 }
 
@@ -88,22 +101,22 @@ export default async function Page({ params }: PageProps) {
 						{
 							section.__typename === "ComponentSectionsSponsorSection"
 								? (
-										<SponsorsHeader
-											title={section.title}
-											background={section.background}
-											foreground={section.foreground}
-											index={i + 1}
-											sponsors={section.sponsors.filter(x => x !== null)}
-										/>
-									)
+									<SponsorsHeader
+										title={section.title}
+										background={section.background}
+										foreground={section.foreground}
+										index={i + 1}
+										sponsors={section.sponsors.filter(x => x !== null)}
+									/>
+								)
 								: (
-										<Header
-											title={section.title}
-											background={section.background}
-											foreground={section.foreground}
-											index={i + 1}
-										/>
-									)
+									<Header
+										title={section.title}
+										background={section.background}
+										foreground={section.foreground}
+										index={i + 1}
+									/>
+								)
 						}
 						{(() => {
 							switch (section.__typename) {

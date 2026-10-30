@@ -21,6 +21,25 @@ export const metadata: Metadata = {
 		template: "%s | Drone Construction Club - SDU Sønderborg",
 		default: "Drone Construction Club - SDU Sønderborg",
 	},
+	robots: {
+		index: true,
+		follow: true,
+		nocache: false,
+		googleBot: {
+			index: true,
+			follow: true,
+			noimageindex: false,
+		},
+	},
+	openGraph: {
+		title: {
+			template: "%s | Drone Construction Club - SDU Sønderborg",
+			default: "Drone Construction Club - SDU Sønderborg",
+		},
+		type: "website",
+		siteName: "Drone Construction Club - SDU Sønderborg",
+		locale: "en_DK",
+	},
 }
 
 export const revalidate = 60
