@@ -17,8 +17,10 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-	title: "DCC",
-	description: "Drone Construction Club - SDU Sønderborg",
+	title: {
+		template: "%s | Drone Construction Club - SDU Sønderborg",
+		default: "Drone Construction Club - SDU Sønderborg",
+	},
 }
 
 export const revalidate = 60

@@ -12,6 +12,7 @@ import SponsorsHeader from "../../components/sponsors-header"
 import TeamGroup from "../../components/team-group"
 import { PagesDocument, PageSlugsDocument } from "../../types/generated/graphql"
 import { getClient, query } from "../apollo-client"
+import { capitalize } from "../../lib/capitalize"
 
 export const revalidate = 120
 
@@ -59,7 +60,7 @@ export async function generateMetadata({
 	}
 
 	return {
-		title: pageData.title,
+		title: capitalize(pageData.title),
 		description: pageData.description,
 	}
 }
@@ -87,22 +88,22 @@ export default async function Page({ params }: PageProps) {
 						{
 							section.__typename === "ComponentSectionsSponsorSection"
 								? (
-									<SponsorsHeader
-										title={section.title}
-										background={section.background}
-										foreground={section.foreground}
-										index={i + 1}
-										sponsors={section.sponsors.filter(x => x !== null)}
-									/>
-								)
+										<SponsorsHeader
+											title={section.title}
+											background={section.background}
+											foreground={section.foreground}
+											index={i + 1}
+											sponsors={section.sponsors.filter(x => x !== null)}
+										/>
+									)
 								: (
-									<Header
-										title={section.title}
-										background={section.background}
-										foreground={section.foreground}
-										index={i + 1}
-									/>
-								)
+										<Header
+											title={section.title}
+											background={section.background}
+											foreground={section.foreground}
+											index={i + 1}
+										/>
+									)
 						}
 						{(() => {
 							switch (section.__typename) {

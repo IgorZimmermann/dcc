@@ -6,6 +6,7 @@ const envSchema = z.object({
 	STRAPI_URL: z.string(),
 	STRAPI_TOKEN: z.string(),
 	STRAPI_MEDIA: z.string(),
+	DOMAIN: z.string(),
 })
 
 /* eslint-disable-next-line node/no-process-env */

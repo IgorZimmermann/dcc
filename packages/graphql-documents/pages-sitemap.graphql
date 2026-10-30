@@ -1,0 +1,6 @@
+query PagesSitemap($status: PublicationStatus) {
+  pages(status: $status) {
+    updatedAt
+    slug
+  }
+}
