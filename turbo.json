@@ -18,5 +18,11 @@
 			"persistent": true
 		}
 	},
-	"globalEnv": []
+	"globalEnv": [
+		"NODE_ENV",
+		"DOMAIN",
+		"STRAPI_URL",
+		"STRAPI_TOKEN",
+		"STRAPI_MEDIA"
+	]
 }
