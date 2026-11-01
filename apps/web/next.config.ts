@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
 		remotePatterns: [new URL(`${env.STRAPI_MEDIA.replace(/\/$/, "")}/**`)],
 		dangerouslyAllowLocalIP: env.NODE_ENV === "development",
 	},
+	outputFileTracingIncludes: {
+		"/api/og": ["./assets/fonts/**/*"],
+	},
 }
 
 export default nextConfig

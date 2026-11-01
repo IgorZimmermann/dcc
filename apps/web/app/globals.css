@@ -1,5 +1,14 @@
-@import url("https://use.typekit.net/gnh3shc.css");
 @import "tailwindcss";
+
+@font-face {
+    font-family: 'DIN Condensed';
+    src: url('../assets/fonts/DINCondensed-Bold.woff2') format('woff2'),
+        url('../assets/fonts/DINCondensed-Bold.woff') format('woff'),
+        url('../assets/fonts/DINCondensed-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
 
 /* Dark base in both color schemes: Safari samples this to tint its toolbars
    whenever it can't show the page through them, so it should blend with the photos. */
@@ -35,5 +44,5 @@ body {
 
 body {
   color: var(--foreground);
-  font-family: "din-condensed", sans-serif;
+  font-family: "DIN Condensed", sans-serif;
 }

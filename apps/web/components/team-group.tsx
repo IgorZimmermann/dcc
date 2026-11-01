@@ -58,7 +58,7 @@ export default function TeamGroup({ title, members, index }: TeamGroupProps) {
 			<div className={cn("w-full -mt-[100dvh]", "lg:ml-auto lg:w-[70dvw] lg:grid lg:grid-cols-2")}>
 				{members.filter(m => m.portrait !== null).map(member => (
 					<div
-						className={cn("h-dvh flex flex-col justify-end items-center gap-10 relative")}
+						className={cn("h-dvh flex flex-col justify-end items-center relative")}
 						key={member.name + title}
 					>
 						<div className={cn("flex flex-col items-center gap-0")}>

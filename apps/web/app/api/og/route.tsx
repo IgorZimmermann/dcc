@@ -49,7 +49,9 @@ export async function GET(request: Request) {
 
 	const { title, background, foreground } = data
 
-	const fontBold = await readFile(join(process.cwd(), "assets/fonts/DINCondensedBold.ttf"))
+	const fontBold = await readFile(
+		join(process.cwd(), "assets", "fonts", "DINCondensed-Bold.woff"),
+	)
 
 	const imgStyle = {
 		position: "absolute",
