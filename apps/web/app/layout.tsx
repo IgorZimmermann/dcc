@@ -2,12 +2,24 @@ import type { Metadata, Viewport } from "next"
 
 import "./globals.css"
 
+import localFont from "next/font/local"
+
 import type { NavigationQuery } from "../types/generated/graphql"
 
 import Footer from "../components/footer"
 import Navbar from "../components/navbar"
+import { cn } from "../lib/cn"
 import { NavigationDocument } from "../types/generated/graphql"
 import { query } from "./apollo-client"
+
+const din = localFont({
+	src: [
+		{ path: "../assets/fonts/DINCondensed-Bold.woff2", weight: "700", style: "normal" },
+		{ path: "../assets/fonts/DINCondensed-Bold.woff", weight: "700", style: "normal" },
+	],
+	variable: "--font-din",
+	display: "swap",
+})
 
 export const viewport: Viewport = {
 	width: "device-width",
@@ -49,7 +61,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
 
 	return (
 		<html lang="en" className="antialiased">
-			<body className="min-h-dvh">
+			<body className={cn(din.variable, "min-h-dvh")}>
 				{navigationData.data && navigationData.data.navigation && (
 					<Navbar
 						email={navigationData.data.navigation.email.address}

@@ -86,7 +86,7 @@ export async function GET(request: Request) {
 					<div
 						style={{
 							display: "flex",
-							fontSize: 1200 / (title.length),
+							fontSize: Math.min(165, 1200 / (title.length * 0.5)),
 							fontWeight: 700,
 							textTransform: "uppercase",
 							color: "#fece1d",
