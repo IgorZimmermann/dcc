@@ -4,6 +4,7 @@ import { join } from "node:path"
 
 import type { PagesQuery } from "../../../types/generated/graphql"
 
+import env from "../../../lib/env"
 import { PagesDocument } from "../../../types/generated/graphql"
 import { getClient } from "../../apollo-client"
 
@@ -104,7 +105,7 @@ export async function GET(request: Request) {
 				)}
 
 				<img
-					src="/logo-text.png"
+					src={`${env.DOMAIN}/logo-text.png`}
 					alt="Drone Construction Club"
 					style={{
 						position: "absolute",
