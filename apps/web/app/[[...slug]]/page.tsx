@@ -63,6 +63,7 @@ export async function generateMetadata({
 	return {
 		title: capitalize(pageData.title),
 		description: pageData.description,
+		metadataBase: new URL(env.DOMAIN),
 		openGraph: {
 			title: capitalize(pageData.title),
 			description: pageData.description,

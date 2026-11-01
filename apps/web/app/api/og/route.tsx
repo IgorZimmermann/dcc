@@ -104,7 +104,7 @@ export async function GET(request: Request) {
 				)}
 
 				<img
-					src="http://localhost:3000/logo-text.png"
+					src="/logo-text.png"
 					alt="Drone Construction Club"
 					style={{
 						position: "absolute",
