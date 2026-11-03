@@ -30,8 +30,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
 	title: {
-		template: "%s | Drone Construction Club - SDU Sønderborg",
-		default: "Drone Construction Club - SDU Sønderborg",
+		template: "%s | Drone Construction Club @ SDU Sønderborg",
+		default: "Drone Construction Club @ SDU Sønderborg",
 	},
 	robots: {
 		index: true,
@@ -45,11 +45,11 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		title: {
-			template: "%s | Drone Construction Club - SDU Sønderborg",
-			default: "Drone Construction Club - SDU Sønderborg",
+			template: "%s | Drone Construction Club @ SDU Sønderborg",
+			default: "Drone Construction Club @ SDU Sønderborg",
 		},
 		type: "website",
-		siteName: "Drone Construction Club - SDU Sønderborg",
+		siteName: "Drone Construction Club @ SDU Sønderborg",
 		locale: "en_DK",
 	},
 }

@@ -12,6 +12,7 @@ import SponsorsHeader from "../../components/sponsors-header"
 import TeamGroup from "../../components/team-group"
 import { capitalize } from "../../lib/capitalize"
 import env from "../../lib/env"
+import { openGraphBase } from "../../lib/metadata"
 import { PagesDocument, PageSlugsDocument } from "../../types/generated/graphql"
 import { getClient, query } from "../apollo-client"
 
@@ -67,10 +68,11 @@ export async function generateMetadata({
 		openGraph: {
 			title: capitalize(pageData.title),
 			description: pageData.description,
-			url: `${env.DOMAIN}/${id ?? ""}`,
+			url: `/${id ?? ""}`,
 			images: [{
 				url: `/api/og?slug=${id}`,
 			}],
+			...openGraphBase,
 		},
 		twitter: {
 			card: "summary_large_image",

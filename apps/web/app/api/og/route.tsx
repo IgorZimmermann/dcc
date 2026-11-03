@@ -30,6 +30,11 @@ async function getHeader(slug: string): Promise<HeaderData | null> {
 					slug: { eq: slug },
 				},
 			},
+			context: {
+				fetchOptions: {
+					next: { revalidate: 3600, tags: ["pages"] },
+				},
+			},
 		},
 	)
 
