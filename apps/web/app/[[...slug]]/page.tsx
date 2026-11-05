@@ -65,12 +65,18 @@ export async function generateMetadata({
 		title: capitalize(pageData.title),
 		description: pageData.description,
 		metadataBase: new URL(env.DOMAIN),
+		alternates: {
+			canonical: "/",
+		},
 		openGraph: {
 			title: capitalize(pageData.title),
 			description: pageData.description,
 			url: `/${id ?? ""}`,
 			images: [{
 				url: `/api/og?slug=${id}`,
+				width: 1200,
+				height: 630,
+				alt: capitalize(pageData.title),
 			}],
 			...openGraphBase,
 		},

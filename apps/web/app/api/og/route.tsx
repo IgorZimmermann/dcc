@@ -28,7 +28,7 @@ async function prepareImage(media: Media, kind: "jpeg" | "png"): Promise<string>
 		throw new Error(`Failed to fetch ${media.url}`)
 	const input = Buffer.from(await res.arrayBuffer())
 
-	const pipeline = sharp(input).resize(1200, 630, { fit: "cover", position: "center" })
+	const pipeline = sharp(input).resize(size.width, size.height, { fit: "cover", position: "center" })
 
 	const out = kind === "png"
 		? await pipeline.png({ compressionLevel: 9, palette: true, quality: 90 }).toBuffer()
