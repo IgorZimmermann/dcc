@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og"
+import { Buffer } from "node:buffer"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
+import sharp from "sharp"
 
 import type { PagesQuery } from "../../../types/generated/graphql"
 
@@ -18,6 +20,21 @@ type HeaderData = {
 	title: string
 	background: Media
 	foreground: Media | null
+}
+
+async function prepareImage(media: Media, kind: "jpeg" | "png"): Promise<string> {
+	const res = await fetch(media.url)
+	if (!res.ok)
+		throw new Error(`Failed to fetch ${media.url}`)
+	const input = Buffer.from(await res.arrayBuffer())
+
+	const pipeline = sharp(input).resize(1200, 630, { fit: "cover", position: "center" })
+
+	const out = kind === "png"
+		? await pipeline.png({ compressionLevel: 9, palette: true, quality: 90 }).toBuffer()
+		: await pipeline.jpeg({ quality: 82, mozjpeg: true }).toBuffer()
+
+	return `data:image/${kind};base64,${out.toString("base64")}`
 }
 
 async function getHeader(slug: string): Promise<HeaderData | null> {
@@ -55,6 +72,11 @@ export async function GET(request: Request) {
 
 	const { title, background, foreground } = data
 
+	const [bgSrc, fgSrc] = await Promise.all([
+		prepareImage(background, "jpeg"),
+		foreground ? prepareImage(foreground, "png") : null,
+	])
+
 	const fontBold = await readFile(
 		join(process.cwd(), "assets", "fonts", "DINCondensed-Bold.woff"),
 	)
@@ -73,7 +95,7 @@ export async function GET(request: Request) {
 		(
 			<div style={{ display: "flex", position: "relative", width: "100%", height: "100%" }}>
 				{/* Background */}
-				<img src={background.url} alt={background.alternativeText ?? ""} style={imgStyle} />
+				<img src={bgSrc} alt={background.alternativeText ?? ""} style={imgStyle} />
 
 				{/* Text */}
 				<div
@@ -105,8 +127,8 @@ export async function GET(request: Request) {
 				</div>
 
 				{/* Foreground, layered above the text */}
-				{foreground != null && (
-					<img src={foreground.url} alt={foreground.alternativeText ?? ""} style={imgStyle} />
+				{foreground != null && fgSrc != null && (
+					<img src={fgSrc} alt={foreground.alternativeText ?? ""} style={imgStyle} />
 				)}
 
 				<img
